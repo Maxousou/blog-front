@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: ocf-postgres
+    environment:
+      POSTGRES_USER: ocfuser
+      POSTGRES_PASSWORD: ocfpassword
+      POSTGRES_DB: ocfdb
+    ports:
+      - "5432:5432"
+
+  ocf-api:
+    build:
+      context: ./chemin/vers/le/projet/ocf-core
+      dockerfile: Dockerfile
+    container_name: ocf-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ocfuser
+      DB_PASSWORD: ocfpassword
+      DB_NAME: ocfdb

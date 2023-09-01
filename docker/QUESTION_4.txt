@@ -1,0 +1,43 @@
+Docker offre plusieurs options pour gérer les réseaux de conteneurs.
+Les réseaux Docker permettent aux conteneurs de communiquer entre eux ou avec des ressources externes,
+tels que d autres conteneurs, des services d orchestration comme Docker Swarm, ou même des hôtes réseau.
+
+Le réseau par défaut est créé automatiquement lors de l installation de Docker sur une machine.
+Chaque conteneur lancé sans spécifier un réseau personnalisé est attaché à ce réseau par défaut.
+
+Chaque conteneur connecté à un réseau bridge a une adresse IP distincte dans le sous-réseau de ce réseau.
+Cela signifie que par défaut, les conteneurs ne peuvent pas communiquer entre eux en utilisant leurs noms de conteneur,
+mais ils peuvent se connecter via leurs adresses IP.
+
+Vous pouvez exposer les ports d un conteneur sur l hote en utilisant la fonction de port mapping.
+Par exemple, vous pouvez faire en sorte qu un conteneur exposant le port 80 soit accessible 
+depuis l hote sur le port 8080.
+
+Les conteneurs attachés à un réseau bridge peuvent accéder à Internet,
+à condition que l hote Docker puisse y accéder.
+
+En plus du réseau par défaut, 
+Docker vous permet de créer des réseaux personnalisés pour répondre à vos besoins spécifiques. 
+Les conteneurs attachés à un réseau personnalisé sont isolés des conteneurs d autres réseaux.
+Cela signifie que les conteneurs dans un réseau personnalisé ne peuvent pas communiquer directement
+avec ceux dans un autre réseau, sauf si vous configurez des ponts entre ces réseaux.
+
+Lorsque vous créez un réseau personnalisé, Docker crée également un serveur DNS pour ce réseau. 
+Les conteneurs dans le même réseau peuvent se référencer mutuellement par leur nom de conteneur, 
+au lieu de leur adresse IP.
+
+Les réseaux personnalisés peuvent être configurés pour fournir une connectivité
+à l extérieur via l interface bridge de l hote Docker ou via une liaison réseau physique.
+
+Pour connecter les conteneurs et exposer leurs ports à l hote, on doit d abord creer un réseau Docker:
+
+docker network create mon-reseau
+
+Lancer un conteneur en utilisant ce réseau:
+
+docker run --network mon-reseau -d --name conteneur1 image1
+docker run --network mon-reseau -d --name conteneur2 image2
+
+Exposer un port d un conteneur à l hote:
+
+docker run -d -p 8080:80 --name mon-conteneur image

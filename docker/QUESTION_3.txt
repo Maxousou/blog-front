@@ -1,0 +1,24 @@
+Les services et les réseaux utilisés sont:
+
+postgres : Ce service utilise l'image Docker PostgreSQL.
+
+container_name : Donne un nom personnalisé au conteneur PostgreSQL.
+
+environment : Définit les variables d'environnement nécessaires pour configurer la base de données,
+telles que le nom d'utilisateur, le mot de passe et la base de données.
+
+ports : Mappe le port 5432 du conteneur PostgreSQL sur le port 5432 de l'hôte, 
+permettant ainsi d'accéder à la base de données depuis l'extérieur.
+
+ocf-api : Ce service est construit à partir du code source de l'API Go, en utilisant le Dockerfile spécifié.
+
+container_name : Donne un nom personnalisé au conteneur de l'API Go.
+
+ports : Mappe le port 8000 du conteneur de l'API Go sur le port 8000 de l'hote,
+permettant d'accéder à l'API depuis l'extérieur.
+
+depends_on : Indique que ce service dépend du service PostgreSQL. 
+Docker Compose attendra que le service PostgreSQL soit opérationnel avant de démarrer l'API Go.
+
+environment : Définit les variables d'environnement pour configurer l'API,
+y compris les informations de connexion à la base de données.

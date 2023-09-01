@@ -1,0 +1,17 @@
+Dans un environnement de développement pour le projet OCF Core, Docker peut être utilisé pour :
+
+Isoler les dépendances du projet, évitant les conflits avec le système hôte.
+Configurer l environnement de développement spécifique au projet.
+Faciliter le développement local tout en gardant les dépendances dans un conteneur.
+Tester le projet dans différentes configurations en créant des conteneurs distincts.
+Gérer les dépendances avec Docker Compose, y compris les bases de données.
+Assurer la cohérence de l environnement entre les développeurs et les plates-formes.
+Fournir une manière reproductible de créer et partager des environnements de développement.
+
+
+Pour gérer la persistance des données avec Docker dans le projet OCF Core,
+vous pouvez utiliser des volumes Docker ou monter des répertoires locaux pour stocker
+des données de manière persistante. Pour les tests, créez des images Docker spécifiques pour vos tests, 
+exécutez des tests dans des conteneurs isolés en montant votre code source, et utilisez Docker Compose 
+pour gérer des environnements complets de tests. L intégration continue (CI) peut automatiser l exécution de tests
+avec Docker, assurant une cohérence dans les résultats des tests.

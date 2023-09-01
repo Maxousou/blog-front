@@ -1,0 +1,19 @@
+# Utilise une image parent officiel de golang
+FROM golang:latest
+
+# On défini le répertoire de travail a l'intérieur du conteneur
+WORKDIR /app
+
+# On copie le code source dans le conteneur
+COPY . .
+
+# On créer l'application golang
+RUN go build main.go
+
+# On expose le port 8000 
+EXPOSE 8000
+
+
+
+# Command pour run votre application
+CMD ["./main"]
